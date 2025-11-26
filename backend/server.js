@@ -1,0 +1,88 @@
+let visits = [
+    {
+      id: 1,
+      date: '2024-03-15',
+      provider: 'Dr. Sarah Chen',
+      specialty: 'Primary Care',
+      vitals: [
+        {
+          name: 'Blood Pressure',
+          value: '118/76',
+          unit: 'mmHg',
+          trend: 'improved',
+          previousValue: '128/82',
+          category: 'Cardio',
+        },
+        {
+          name: 'Heart Rate',
+          value: '68',
+          unit: 'bpm',
+          trend: 'improved',
+          previousValue: '75',
+          category: 'Cardio',
+        },
+        {
+          name: 'Weight',
+          value: '165',
+          unit: 'lbs',
+          trend: 'stable',
+          previousValue: '165',
+          category: 'General',
+        },
+        {
+          name: 'BMI',
+          value: '24.2',
+          unit: '',
+          trend: 'stable',
+          previousValue: '24.2',
+          category: 'Normal',
+        },
+      ],
+      labs: [
+        {
+          name: 'Hemoglobin A1C',
+          value: '5.4',
+          unit: '%',
+          trend: 'improved',
+          previousValue: '5.8',
+          range: '< 5.7',
+          status: 'normal',
+        },
+        {
+          name: 'LDL Cholesterol',
+          value: '115',
+          unit: 'mg/dL',
+          trend: 'improved',
+          previousValue: '142',
+          range: '< 100',
+          status: 'borderline',
+        },
+        {
+          name: 'HDL Cholesterol',
+          value: '58',
+          unit: 'mg/dL',
+          trend: 'improved',
+          previousValue: '52',
+          range: '> 40',
+          status: 'normal',
+        },
+        {
+          name: 'Vitamin D',
+          value: '32',
+          unit: 'ng/mL',
+          trend: 'stable',
+          previousValue: '31',
+          range: '30-100',
+          status: 'normal',
+        },
+      ],
+      focusPoints: [
+        'Your blood pressure has improved significantly - keep up the exercise routine',
+        'A1C trending in the right direction - continue dietary modifications',
+        'LDL cholesterol improving but still above optimal - consider increasing cardio activity',
+      ],
+      providerNotes:
+        'Overall you are trending in the right direction. Keep your current exercise routine and focus on consistent meals with fiber and protein.',
+    },
+  ]
+  

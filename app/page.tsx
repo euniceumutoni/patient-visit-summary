@@ -1,13 +1,14 @@
 'use client'
 
-import { VisitCard } from '@/components/visit-card'
+import { useState } from 'react'
+import { VisitCard, type Visit } from '@/components/visit-card'
 import { Activity, Heart, Droplet, Weight, Settings, Watch, TrendingUp } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { AIExplainer } from '@/components/ai-explainer'
 import { AppleHealthDetail } from '@/components/apple-health-detail'
-import { useState } from 'react'
 
-const latestVisit = {
+const latestVisit: Visit = {
+  id: 1,
   date: '2024-03-15',
   provider: 'Dr. Sarah Chen',
   specialty: 'Primary Care',
@@ -16,7 +17,7 @@ const latestVisit = {
       name: 'Blood Pressure',
       value: '118/76',
       unit: 'mmHg',
-      trend: 'improved' as const,
+      trend: 'improved',
       previousValue: '128/82',
       icon: Activity,
     },
@@ -24,7 +25,7 @@ const latestVisit = {
       name: 'Heart Rate',
       value: '68',
       unit: 'bpm',
-      trend: 'improved' as const,
+      trend: 'improved',
       previousValue: '75',
       icon: Heart,
     },
@@ -32,7 +33,7 @@ const latestVisit = {
       name: 'Weight',
       value: '165',
       unit: 'lbs',
-      trend: 'stable' as const,
+      trend: 'stable',
       previousValue: '165',
       icon: Weight,
     },
@@ -40,7 +41,7 @@ const latestVisit = {
       name: 'BMI',
       value: '24.2',
       unit: '',
-      trend: 'stable' as const,
+      trend: 'stable',
       previousValue: '24.2',
       category: 'Normal',
       icon: Weight,
@@ -51,37 +52,37 @@ const latestVisit = {
       name: 'Hemoglobin A1C',
       value: '5.4',
       unit: '%',
-      trend: 'improved' as const,
+      trend: 'improved',
       previousValue: '5.8',
       range: '< 5.7',
-      status: 'normal' as const,
+      status: 'normal',
     },
     {
       name: 'LDL Cholesterol',
       value: '115',
       unit: 'mg/dL',
-      trend: 'improved' as const,
+      trend: 'improved',
       previousValue: '142',
       range: '< 100',
-      status: 'borderline' as const,
+      status: 'borderline',
     },
     {
       name: 'HDL Cholesterol',
       value: '58',
       unit: 'mg/dL',
-      trend: 'improved' as const,
+      trend: 'improved',
       previousValue: '52',
       range: '> 40',
-      status: 'normal' as const,
+      status: 'normal',
     },
     {
       name: 'Vitamin D',
       value: '32',
       unit: 'ng/mL',
-      trend: 'stable' as const,
+      trend: 'stable',
       previousValue: '31',
       range: '30-100',
-      status: 'normal' as const,
+      status: 'normal',
     },
   ],
   focusPoints: [
@@ -89,6 +90,8 @@ const latestVisit = {
     'A1C trending in the right direction - continue dietary modifications',
     'LDL cholesterol improving but still above optimal - consider increasing cardio activity',
   ],
+  providerNotes:
+    'Overall you are trending in the right direction. Keep your current exercise routine and focus on consistent meals with fiber and protein.',
 }
 
 export default function Home() {
@@ -115,7 +118,7 @@ export default function Home() {
       </header>
 
       <div className="mx-auto max-w-7xl px-4 py-8">
-        <div 
+        <div
           className="mb-6 rounded-lg border border-primary/20 bg-primary/5 p-4 cursor-pointer hover:bg-primary/10 transition-colors"
           onClick={() => setShowHealthDetail(true)}
         >

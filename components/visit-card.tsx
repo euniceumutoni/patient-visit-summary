@@ -1,20 +1,20 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { TrendIndicator } from './trend-indicator'
-import { Type as type, type LucideIcon } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { FlaskConical } from 'lucide-react'
 
-type Vital = {
+export type Vital = {
   name: string
   value: string
   unit: string
   trend: 'improved' | 'decreased' | 'stable'
   previousValue: string
-  icon: LucideIcon
+  icon?: LucideIcon
   category?: string
 }
 
-type Lab = {
+export type Lab = {
   name: string
   value: string
   unit: string
@@ -24,7 +24,8 @@ type Lab = {
   status: 'normal' | 'borderline' | 'high' | 'low'
 }
 
-type Visit = {
+export type Visit = {
+  id: number
   date: string
   provider: string
   specialty: string
@@ -87,39 +88,44 @@ export function VisitCard({ visit }: { visit: Visit }) {
             </button>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {visit.vitals.map((vital) => (
-              <div
-                key={vital.name}
-                className="flex flex-col gap-3 rounded-lg border bg-card p-4 transition-shadow hover:shadow-md"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="rounded-lg bg-primary/10 p-2">
-                    <vital.icon className="h-4 w-4 text-primary" />
+            {visit.vitals.map((vital) => {
+              const IconComponent = vital.icon ?? FlaskConical
+
+              return (
+                <div
+                  key={vital.name}
+                  className="flex flex-col gap-3 rounded-lg border bg-card p-4 transition-shadow hover:shadow-md"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="rounded-lg bg-primary/10 p-2">
+                      <IconComponent className="h-4 w-4 text-primary" />
+                    </div>
+                    <TrendIndicator trend={vital.trend} size="sm" />
                   </div>
-                  <TrendIndicator trend={vital.trend} size="sm" />
-                </div>
-                <div>
-                  <p className="mb-1 text-xs font-medium text-muted-foreground">{vital.name}</p>
-                  <p className="text-2xl font-bold text-foreground">
-                    {vital.value}
-                    {vital.unit && (
-                      <span className="ml-1 text-sm font-normal text-muted-foreground">
-                        {vital.unit}
-                      </span>
+                  <div>
+                    <p className="mb-1 text-xs font-medium text-muted-foreground">{vital.name}</p>
+                    <p className="text-2xl font-bold text-foreground">
+                      {vital.value}
+                      {vital.unit && (
+                        <span className="ml-1 text-sm font-normal text-muted-foreground">
+                          {vital.unit}
+                        </span>
+                      )}
+                    </p>
+                    {vital.category && (
+                      <p className="mt-1 text-xs font-medium text-success">{vital.category}</p>
                     )}
-                  </p>
-                  {vital.category && (
-                    <p className="mt-1 text-xs font-medium text-success">{vital.category}</p>
-                  )}
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    Previous: {vital.previousValue} {vital.unit}
-                  </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Previous: {vital.previousValue} {vital.unit}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
+        {/* Labs */}
         <div className="mb-8">
           <div className="mb-4 flex items-center gap-2">
             <FlaskConical className="h-5 w-5 text-primary" />
@@ -164,7 +170,9 @@ export function VisitCard({ visit }: { visit: Visit }) {
                 <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
                   {index + 1}
                 </div>
-                <p className="text-pretty text-sm leading-relaxed text-card-foreground">{point}</p>
+                <p className="text-pretty text-sm leading-relaxed text-card-foreground">
+                  {point}
+                </p>
               </div>
             ))}
           </div>
